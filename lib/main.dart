@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 void main() {
   runApp(
     ChangeNotifierProvider(
-      create: (BuildContext context) => CounterModel(),
+      create: (context) => CounterModel(),
       child: const MyApp(),
     ),
   );
@@ -34,16 +34,31 @@ class CounterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // final counter = Provider.of<CounterModel>(
+    //   context,
+    //);
     return Scaffold(
       body: Center(
-        child: Column(
-          children: [
-            Text('count value'),
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text('Increament'),
-            ),
-          ],
+        child: Consumer<CounterModel>(
+          builder: (
+            BuildContext context,
+            CounterModel value,
+            Widget? child,
+          ) {
+            return Column(
+              children: [
+                Text(
+                  'Count Value: ${value.counter}',
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    value.increament();
+                  },
+                  child: const Text('Increament'),
+                ),
+              ],
+            );
+          },
         ),
       ),
     );
