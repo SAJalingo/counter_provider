@@ -1,7 +1,14 @@
+import 'package:counter_provider/Providers/CounterModel.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (BuildContext context) => CounterModel(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -27,16 +34,18 @@ class CounterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text('Counter'),
-        ElevatedButton(
-          onPressed: () {
-            
-          },
-          child: const Text('Increament'),
+    return Scaffold(
+      body: Center(
+        child: Column(
+          children: [
+            Text('count value'),
+            ElevatedButton(
+              onPressed: () {},
+              child: const Text('Increament'),
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 }
